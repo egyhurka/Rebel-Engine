@@ -4,6 +4,18 @@
 
 #include <iostream>
 
+#define RES_800x600		{ 800,	600 }
+#define RES_1024x768	{ 1024, 768 }
+#define RES_1280x1024	{ 1280, 1024 }
+#define RES_1366x768	{ 1366, 768 }
+#define RES_1920x1080	{ 1920, 1080 }
+#define RES_2560x1440	{ 2560, 1440 }
+
+struct Resulution
+{
+	unsigned int width, height;
+};
+
 struct WindowData
 {
 	GLFWwindow* windowRef;
@@ -11,13 +23,12 @@ struct WindowData
 	bool ShouldClose = false;
 };
 
-class Window 
+class Window
 {
 public:
-	Window(int width, int height, std::string title);
+	Window(Resulution resulution, std::string title);
 
 	WindowData getData();
-
 
 private:
 	int width, height;

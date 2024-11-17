@@ -1,12 +1,12 @@
 #include "Window.h"
 
-Window::Window(int width, int height, std::string title) 
+Window::Window(Resulution resulution, std::string title) 
 {
 	if (!glfwInit())
 		throw std::runtime_error("Failed to initialize glfw.");;
 
-	this->width = width;
-	this->height = height;
+	this->width = static_cast<int>(resulution.width);
+	this->height = static_cast<int>(resulution.height);
 	this->title = title;
 
 	if (!CreateWindow()) 

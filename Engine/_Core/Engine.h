@@ -6,7 +6,7 @@
 class Engine 
 {
 public:
-	Engine(unsigned int width, unsigned int height, std::string title);
+	Engine(Resulution resulution, std::string title);
 	~Engine();
 
 	void Run();

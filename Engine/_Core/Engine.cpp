@@ -2,9 +2,9 @@
 
 #include <iostream>
 
-Engine::Engine(unsigned int width, unsigned int height, std::string title)
+Engine::Engine(Resulution resulution, std::string title)
 {
-	window = new Window(static_cast<int>(width), static_cast<int>(height), title.c_str());
+	window = new Window(resulution, title.c_str());
 	windowRef = window->getData().windowRef;
 	
 	InitInput(windowRef);
