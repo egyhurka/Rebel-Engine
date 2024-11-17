@@ -137,10 +137,12 @@
   <ItemGroup>
     <ClInclude Include="Dependencies\Include\GLFW\glfw3.h" />
     <ClInclude Include="Dependencies\Include\GLFW\glfw3native.h" />
+    <ClInclude Include="Input\Input.h" />
     <ClInclude Include="Window\Window.h" />
     <ClInclude Include="_Core\Engine.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Input\Input.cpp" />
     <ClCompile Include="Window\Window.cpp" />
     <ClCompile Include="_Core\Engine.cpp" />
   </ItemGroup>

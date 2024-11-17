@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../Window/Window.h"
+#include "../Input/Input.h"
 
 class Engine 
 {
@@ -11,4 +12,6 @@ public:
 	void Run();
 private:
 	Window* window;
+	GLFWwindow* windowRef;
+	void ProcessInput();
 };
