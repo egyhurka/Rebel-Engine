@@ -138,13 +138,31 @@
     <ClInclude Include="Dependencies\Include\GLFW\glfw3.h" />
     <ClInclude Include="Dependencies\Include\GLFW\glfw3native.h" />
     <ClInclude Include="Input\Input.h" />
+    <ClInclude Include="Mesh\Mesh.h" />
+    <ClInclude Include="Renderer\Renderer.h" />
+    <ClInclude Include="Shader\Shader.h" />
     <ClInclude Include="Window\Window.h" />
     <ClInclude Include="_Core\Engine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Input\Input.cpp" />
+    <ClCompile Include="Mesh\Mesh.cpp" />
+    <ClCompile Include="Renderer\Renderer.cpp" />
+    <ClCompile Include="Shader\Shader.cpp" />
     <ClCompile Include="Window\Window.cpp" />
     <ClCompile Include="_Core\Engine.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shader\Shaders\GeometryShader.glsl" />
+    <None Include="Shader\Shaders\VertexShader.glsl" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Shader\Shaders\FragmentShader.glsl">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
