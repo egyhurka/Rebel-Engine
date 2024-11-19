@@ -9,7 +9,7 @@ out vec3 outColor;
 
 void main()
 {
-	for ()int i = 0; i < 3; i++)
+	for (int i = 0; i < 3; i++)
 	{
 		gl_Position = gl_in[i].gl_Position;
         outColor = fragColor[i];
