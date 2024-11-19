@@ -6,7 +6,7 @@ Engine::Engine(Resulution resulution, std::string title)
 {
 	window = new Window(resulution, title.c_str());
 	windowRef = window->getData().windowRef;
-	
+
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
 		throw std::runtime_error("Failed to initialize glad.");
 

@@ -6,9 +6,9 @@
 
 #include <iostream>
 
-#define SHADER_DEFAULT_VERTEX "Engine/Shaders/VertexShader.glsl"
-#define SHADER_DEFAULT_FRAGMENT "Engine/Shaders/FragmentShader.glsl"
-#define SHADER_DEFAULT_GEOMETRY "Engine/Shaders/GeometryShader.glsl"
+constexpr const char* SHADER_DEFAULT_VERTEX = "Engine/Shaders/VertexShader.glsl";
+constexpr const char* SHADER_DEFAULT_FRAGMENT = "Engine/Shaders/FragmentShader.glsl";
+constexpr const char* SHADER_DEFAULT_GEOMETRY = "Engine/Shaders/GeometryShader.glsl";
 
 class Shader
 {

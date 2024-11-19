@@ -151,18 +151,14 @@
     <ClCompile Include="Shader\Shader.cpp" />
     <ClCompile Include="Window\Window.cpp" />
     <ClCompile Include="_Core\Engine.cpp" />
+    <ClCompile Include="_Core\glad.c" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shader\Shaders\GeometryShader.glsl" />
     <None Include="Shader\Shaders\VertexShader.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Shader\Shaders\FragmentShader.glsl">
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
-      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
-    </FxCompile>
+    <Text Include="Shader\Shaders\FragmentShader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

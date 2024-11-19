@@ -9,6 +9,11 @@ Window::Window(Resulution resulution, std::string title)
 	this->height = static_cast<int>(resulution.height);
 	this->title = title;
 
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_DEPTH_BITS, 24);
+
 	if (!CreateWindow()) 
 	{
 		glfwTerminate();

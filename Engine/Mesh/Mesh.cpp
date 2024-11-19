@@ -38,6 +38,6 @@ Mesh::~Mesh()
 void Mesh::draw()
 {
     glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES, 0, vertices.size() / 3);
+    glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size() / 3));
     glBindVertexArray(0);
 }
