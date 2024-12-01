@@ -1,14 +1,16 @@
 #include "Shader.h"
 
+#include <filesystem>
+#include <iostream>
 #include <fstream>
 #include <sstream>
 #include <string>
 
-Shader::Shader(const char* vertexPath, const char* geometryPath, const char* fragmentPath)
+Shader::Shader(ShaderSourceGroup shaderNameGroup)
 {
-    GLuint vertexShader = compileShader(vertexPath, GL_VERTEX_SHADER);
-    GLuint fragmentShader = compileShader(fragmentPath, GL_FRAGMENT_SHADER);
-    GLuint geometryShader = (geometryPath != "") ? compileShader(geometryPath, GL_GEOMETRY_SHADER) : NULL;
+    GLuint vertexShader = compileShader(shaderNameGroup.vertexShaderName, GL_VERTEX_SHADER);
+    GLuint fragmentShader = compileShader(shaderNameGroup.fragmentShaderName, GL_FRAGMENT_SHADER);
+    GLuint geometryShader = (shaderNameGroup.geometryShaderName != "") ? compileShader(shaderNameGroup.geometryShaderName, GL_GEOMETRY_SHADER) : NULL;
 
     ID = glCreateProgram();
     glAttachShader(ID, vertexShader);
@@ -35,19 +37,29 @@ void Shader::setColor(const glm::vec3 color)
     setUniform3fv(color, "uColor");
 }
 
-std::string Shader::loadShader(const char* filePath)
+std::string Shader::getShaderPath(const std::string& shaderName)
 {
-	std::ifstream file(filePath);
-	std::stringstream buffer;
-	buffer << file.rdbuf();
-	return buffer.str();
+    std::filesystem::path shaderPath = std::filesystem::current_path() / "Shaders" / shaderName;
+    return shaderPath.string();
 }
 
-GLuint Shader::compileShader(const char* path, GLenum shaderType)
+std::string Shader::readShader(const char* filePath)
+{
+    if (!std::filesystem::exists(filePath)) {
+        std::cerr << "Shader not exists: " << filePath << std::endl;
+    }
+    std::ifstream file(filePath);
+    std::stringstream buffer;
+    buffer << file.rdbuf();
+    std::string content = buffer.str();
+    return content;
+}
+
+GLuint Shader::compileShader(std::string shaderName, GLenum shaderType)
 {
     if (shaderType == GL_GEOMETRY_SHADER)
         return 0;
-    std::string shaderSource = loadShader(path);
+    std::string shaderSource = readShader(getShaderPath(shaderName).c_str());
     const char* source = shaderSource.c_str();
 
     GLuint shader = glCreateShader(shaderType);
@@ -87,14 +99,12 @@ void Shader::errorReport(GLuint shader, GLenum type) {
     }
 }
 
-GLuint Shader::getLocation(const GLchar* uniform)
+GLint Shader::getLocation(const GLchar* uniform)
 {
-    GLuint location = glGetUniformLocation(ID, uniform);
-    if (location == -1)
-    {
-        std::ostringstream errorMessage;
-        errorMessage << "Uniform not found: " << location;
-        throw std::runtime_error(errorMessage.str());
+    GLint location = glGetUniformLocation(ID, uniform);
+    if (location == -1) {
+        std::cerr << "Uniform not found: " << uniform << std::endl;
+        return -1;
     }
     return location;
 }

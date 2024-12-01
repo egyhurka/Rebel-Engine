@@ -1,6 +1,6 @@
 #include "Mesh.h"
 
-Mesh::Mesh(const std::vector<GLfloat> vertices, Shader* shader, const glm::vec3& color) 
+Mesh::Mesh(const std::vector<GLfloat> vertices, std::shared_ptr<Shader> shader, const glm::vec3& color)
     : vertices(vertices) , shader(shader), color(color)
 {
     if (!shader)

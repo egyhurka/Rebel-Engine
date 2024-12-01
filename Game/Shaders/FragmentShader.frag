@@ -1,9 +1,9 @@
 #version 330 core
 
 in vec4 fragColor;
-out vec4 FragColor;
+out vec4 finalColor;
 
 void main()
 {
-    FragColor = fragColor;
+    finalColor = fragColor;
 }
