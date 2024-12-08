@@ -150,11 +150,6 @@
       <Project>{b08e4420-127f-4eef-b033-f0f4585834b7}</Project>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Shaders\FragmentShader.frag" />
-    <None Include="Shaders\GeometryShader.glsl" />
-    <None Include="Shaders\VertexShader.vert" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

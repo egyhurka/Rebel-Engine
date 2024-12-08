@@ -1,7 +1,7 @@
 #include "Mesh.h"
 
-Mesh::Mesh(const std::vector<GLfloat> vertices, std::shared_ptr<Shader> shader, const glm::vec3& color)
-    : vertices(vertices) , shader(shader), color(color)
+Mesh::Mesh(const std::vector<float> vertices, const std::vector<unsigned int> indices, std::shared_ptr<Shader> shader, const glm::vec3& color)
+    : vertices(vertices), indices(indices), shader(shader), color(color)
 {
     if (!shader)
         throw std::runtime_error("Shader pointer is null.");
@@ -14,18 +14,28 @@ Mesh::Mesh(const std::vector<GLfloat> vertices, std::shared_ptr<Shader> shader, 
     if (VBO == 0)
         throw std::runtime_error("VBO generation failed.");
 
+    glGenBuffers(1, &EBO);
+    if (EBO == 0)
+        throw std::runtime_error("EBO generation failed.");
+
     glBindVertexArray(VAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
-    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(GLfloat), vertices.data(), GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, vertices.size() * sizeof(float), vertices.data(), GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, indices.size() * sizeof(unsigned int), indices.data(), GL_STATIC_DRAW);
 
     // Position attribute
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
 
     shader->use();
 
-    shader->setColor(color);
+    //shader->setColor(color);
 }
 
 Mesh::~Mesh()
@@ -38,6 +48,6 @@ Mesh::~Mesh()
 void Mesh::draw()
 {
     glBindVertexArray(VAO);
-    glDrawArrays(GL_TRIANGLES, 0, static_cast<GLsizei>(vertices.size() / 3));
+    glDrawElements(GL_TRIANGLES, static_cast<GLsizei>(indices.size()), GL_UNSIGNED_INT, 0);
     glBindVertexArray(0);
 }

@@ -35,7 +35,7 @@ WindowData Window::getData()
 
 bool Window::ShouldClose()
 {
-	return glfwWindowShouldClose(window);;
+	return glfwWindowShouldClose(window);
 }
 
 bool Window::CreateWindow() 

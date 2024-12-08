@@ -3,9 +3,9 @@
 #include <iostream>
 
 const ShaderSourceGroup SHADER_DEFAULT_SOURCE_GROUP = {
-	"VertexShader.vert",
-	"FragmentShader.frag",
-	"GeometryShader.glsl"
+	"shader.vert",
+	"shader.frag",
+	""
 };
 
 Engine::Engine(Resulution resulution, std::string title)
@@ -23,7 +23,7 @@ Engine::Engine(Resulution resulution, std::string title)
 
 	std::shared_ptr<Shader> SHADER_DEFAULT = std::make_shared<Shader>(SHADER_DEFAULT_SOURCE_GROUP);
 	
-	Mesh mesh(Mesh::Triangle, SHADER_DEFAULT, glm::vec3(1.0f, 0.0f, 0.0f));
+	Mesh mesh(Mesh::TriangleVert, Mesh::TriangleInd, SHADER_DEFAULT, glm::vec3(1.0f, 0.0f, 0.0f));
 	renderer.addToRenderList(&mesh);
 }
 
@@ -36,8 +36,8 @@ Engine::~Engine()
 void Engine::Run() {
 	while (!window->getData().ShouldClose)
 	{
-		glClear(GL_COLOR_BUFFER_BIT);
-		glClearColor(0.0f, 0.4f, 0.5f, 1.0f);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
 		renderer.render();
 

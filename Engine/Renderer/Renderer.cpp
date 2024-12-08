@@ -11,18 +11,19 @@ void Renderer::addToRenderList(Mesh* mesh)
 
 void Renderer::render()
 {
-	std::shared_ptr<Shader> currentShader = nullptr;
+	//std::shared_ptr<Shader> currentShader = nullptr;
 	for (const auto& pair : renderList)
 	{
 		Mesh* mesh = pair.first;
-		auto shader = pair.second;
+		const auto& shader = pair.second;
 
-		if (shader != currentShader)
+		/*if (shader != currentShader)
 		{
 			currentShader = shader;
 			shader->use();
-		}
+		}*/
 
+		shader->use();
 		mesh->draw();
 	}
 }
