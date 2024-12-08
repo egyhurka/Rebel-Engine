@@ -40,6 +40,12 @@ void Shader::setColor(const glm::vec3 color)
 std::string Shader::getShaderPath(const std::string& shaderName)
 {
     std::filesystem::path shaderPath = std::filesystem::current_path() / shaderName;
+
+    if (!std::filesystem::exists(shaderPath) && shaderPath.parent_path().filename() == "Debug")
+    {
+        shaderPath = shaderPath.parent_path().parent_path().parent_path() / "Engine" / "Shader" / "Shaders" / shaderName;
+    }
+
     std::cout << "Loading shader from: " << shaderPath.string() << std::endl;
     return shaderPath.string();
 }
